@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=emailservice
+POSTGRES_USER=IscIZEMuXKPZxwiiFteZCwiavsMBxodk
+POSTGRES_PASSWORD=xtQ9d1S9aiLGM3UfQStllm3BID5M3NmCUYzfNoQIMUM96yG3ZeVmBVoW5y64byhk

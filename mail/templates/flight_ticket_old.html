@@ -1,0 +1,180 @@
+{% extends 'mail_template.html' %}
+
+{% block extra_styles %}
+    /* Custom styles specific to this template */
+    .flight-info-card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        background-color: white;
+        width: 100%;
+        max-width: 800px;
+        padding: 2rem 4rem;
+        margin: auto;
+        box-sizing: border-box;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .flight-info-container,
+    .flight-info-time-container,
+    .flight-duration-category-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .flight-info-airport {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+
+    .flight-info-airport h1 {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: bold;
+        line-height: 1.2;
+        color: #333;
+    }
+
+    .flight-info-city {
+        font-size: 0.5rem;
+        color: #777;
+        text-align: center;
+    }
+
+    .flight-path {
+        width: 75%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .flight-path img {
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+    }
+
+    .logo {
+        width: 60px;
+        height: auto;
+        margin: 0 10px;
+    }
+
+    .flight-info-time {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 80px;
+    }
+
+    .flight-info-time h1 {
+        margin: 0;
+        font-size: 1.8rem;
+        line-height: 1;
+        color: #333;
+    }
+
+    .flight-info-time .date {
+        font-size: 0.8rem;
+        color: #777;
+        text-align: center;
+    }
+
+    .flight-duration-category-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        border-top: 0.1rem dashed #777;
+        padding-top: 1rem;
+    }
+
+    .flight-duration-category-info {
+        font-size: 1rem;
+        color: #555;
+    }
+
+    .flight-duration-category-subinfo {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .content{
+        width: 100%;
+        max-width: 800px;
+        padding: 2rem 4rem;
+        margin: auto;
+        box-sizing: border-box;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .image{
+        width:100%;
+        height:16rem;
+    }
+{% endblock %}
+
+{% block email_content %}
+<div class="content">
+
+
+    <img class = "image"src="http://services.kandharitravels.com:8020/media/uploads/plane-wing.png" alt="plane wing"/>
+    <h1>Hi {{name}}</h1>
+    
+    <p>Your trip to <strong>Bali</strong> starts on <strong>April 04, 2022</strong>. Make your trip easier, and check in</p>
+    <p> online now for yourself and your travel companions. Also, check out our additional</p>
+    <p> services below to make the most of your trip.</p>
+
+    <a href="#" class="cta-button">Check Your Booking</a>
+
+    
+    <div class="flight-info-card">
+        <div class="flight-info-container">
+            <div class="flight-info-airport">
+                <h1>FRA</h1>
+                <div class="flight-info-city">Frankfurt</div>
+            </div>
+
+            <div class="flight-path">
+                <img src="http://services.kandharitravels.com:8020/media/uploads/journey%20svg.png" alt="Flight Path">
+            </div>
+
+            <div class="flight-info-airport">
+                <h1>BLI</h1>
+                <div class="flight-info-city">Bali</div>
+            </div> 
+        </div>
+
+        <div class="flight-info-time-container">
+            <div class="flight-info-time">
+                <h1>10:30</h1>
+                <div class="date">2024-12-08</div>
+            </div>
+
+            <img src="http://services.kandharitravels.com:8020/media/uploads/emirates.png" alt="Emirates Logo" class="logo">
+
+            <div class="flight-info-time">
+                <h1>10:30</h1>
+                <div class="date">2024-12-09</div>
+            </div>
+        </div>
+
+        <div class="flight-duration-category-wrapper">
+            <div>
+                <span class="flight-duration-category-info">Flight duration: </span>
+                <span class="flight-duration-category-subinfo">22 hours</span>
+            </div>
+            <div>
+                <span class="flight-duration-category-info">Travel category: </span>
+                <span class="flight-duration-category-subinfo">Economy</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
