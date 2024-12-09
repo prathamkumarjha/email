@@ -1,0 +1,17 @@
+{% extends "mail_template.html" %}
+
+{% block email_content %}
+<div class="email-container">
+<div class="content">
+    <h1>Your Account is Pending Approval</h1>
+    <p>Hi {{ name }},</p>
+    <p>Thank you for signing up! We’re currently reviewing the details of your account to ensure everything is in order. This process typically takes {{ timeframe }}.</p>
+    <p>Once your account is approved, we’ll notify you right away. If additional information is needed, we’ll reach out.</p>
+    <p>If you have any questions or need assistance, feel free to contact us at:</p>
+    <a href="{{ company.adminUrl }}" class="cta-button">Contact Support</a>
+    <p>Thank you for your patience!</p>
+    <p>Best regards, <br> {{ company.companyName }}</p>
+</div>
+</div>
+{% endblock %}
+
