@@ -47,7 +47,7 @@ def process_task():
             with transaction.atomic():
                 print("this is status", status)
                 # task.status = status
-                task.retry += 1
+                # task.retry += 1
                 task.save()
         except Exception as e:
             print(f"Error processing task {task.id}: {e}")

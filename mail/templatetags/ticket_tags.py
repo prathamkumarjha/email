@@ -44,4 +44,16 @@ def get_flight_summary(flight_details):
 # def get_location_name(location_code):
 #     return location_data.get_location_name_by_iata(location_code)
 
+@register.filter
+def attribute(obj, attr_name):
+    return getattr(obj, attr_name, None)
 
+
+
+@register.filter(name="get_last_index")
+def get_last_index(segments):
+    try:
+        return segments[-1]
+    except (IndexError, TypeError):
+        return None
+    

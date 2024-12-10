@@ -1,5 +1,6 @@
 {% extends 'mail_template.html' %}
-
+{%load static%}
+{% load ticket_tags %}
 {% block extra_styles %}
     /* Custom styles specific to this template */
     .flight-info-card {
@@ -9,7 +10,7 @@
         width: 100%;
         max-width: 800px;
         padding: 2rem 4rem;
-        margin: auto;
+        margin: 1rem;
         box-sizing: border-box;
         transition: all 0.3s ease-in-out;
     }
@@ -40,7 +41,7 @@
     }
 
     .flight-info-city {
-        font-size: 0.5rem;
+        font-size: 1rem;
         color: #777;
         text-align: center;
     }
@@ -118,6 +119,10 @@
         width:100%;
         height:16rem;
     }
+
+    .stops{
+        text-align: center;
+    }
 {% endblock %}
 
 {% block email_content %}
@@ -126,19 +131,24 @@
 
     <img class = "image"src="http://services.kandharitravels.com:8020/media/uploads/plane-wing.png" alt="plane wing"/>
     <h1>Hi {{name}}</h1>
+    {% with first_flight=ticket.booking_flights.0 %}
+    <p>Your trip to <strong>{{ first_flight.flight_details.boardingTo }}</strong> starts on <strong>{{ first_flight.flight_details.segments.0.DepartureTime|convert_time_str:'%Y-%m-%d' }}</strong>. Make your trip easier, and check in</p>
     
-    <p>Your trip to <strong>Bali</strong> starts on <strong>April 04, 2022</strong>. Make your trip easier, and check in</p>
+    
     <p> online now for yourself and your travel companions. Also, check out our additional</p>
     <p> services below to make the most of your trip.</p>
 
     <a href="#" class="cta-button">Check Your Booking</a>
+    <h1>Your trip</h1>
+    <p>your first flight from <strong>{{ first_flight.flight_details.from }}</strong> to <strong>{{ first_flight.flight_details.to }}</strong> </p>
+    {% endwith %}
+    {% for flight in ticket.booking_flights %}
 
-    
     <div class="flight-info-card">
         <div class="flight-info-container">
             <div class="flight-info-airport">
-                <h1>FRA</h1>
-                <div class="flight-info-city">Frankfurt</div>
+                <h1>{{flight.flight_details.from}}</h1>
+                <div class="flight-info-city">{{flight.flight_details.boardingFrom}}</div>
             </div>
 
             <div class="flight-path">
@@ -146,23 +156,27 @@
             </div>
 
             <div class="flight-info-airport">
-                <h1>BLI</h1>
-                <div class="flight-info-city">Bali</div>
+                <h1>{{flight.flight_details.to}}</h1>
+                <div class="flight-info-city">{{flight.flight_details.boardingTo}}</div>
             </div> 
         </div>
 
         <div class="flight-info-time-container">
             <div class="flight-info-time">
-                <h1>10:30</h1>
-                <div class="date">2024-12-08</div>
+                <h1>{{ flight.flight_details.segments.0.DepartureTime|convert_time_str:'%H:%M' }}
+                </h1>
+                <div class="date">{{ flight.flight_details.segments.0.DepartureTime|convert_time_str:'%Y-%m-%d' }}</div>
             </div>
-
+            <div>
             <img src="http://services.kandharitravels.com:8020/media/uploads/emirates.png" alt="Emirates Logo" class="logo">
-
-            <div class="flight-info-time">
-                <h1>10:30</h1>
-                <div class="date">2024-12-09</div>
+            <div class="stops">2</div>
             </div>
+            <div class="flight-info-time">
+                {% with last_segment=flight.flight_details.segments|get_last_index %}
+                <h1>{{ last_segment.ArrivalTime|convert_time_str:'%H:%M' }}</h1>
+                <div class="date">{{ last_segment.ArrivalTime|convert_time_str:'%Y-%m-%d' }}</div>
+            {% endwith %}
+                    </div>
         </div>
 
         <div class="flight-duration-category-wrapper">
@@ -176,5 +190,6 @@
             </div>
         </div>
     </div>
+    {% endfor %}
 </div>
 {% endblock %}

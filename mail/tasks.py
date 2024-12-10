@@ -79,9 +79,11 @@ class EmailService:
             # Add extra context if needed
             name = task.content.get("name")
             company = task.content.get("company", {})
+            ticket = task.content.get("ticket",{})
             context['name'] = name
             context['company'] = company
-            ticket = task.content.get("ticket",{})
+            context['ticket'] = ticket
+            
             # Render HTML to string
             html_content = render_to_string(template_name, context)
 
